@@ -1,4 +1,4 @@
-# Fine-Tuned Text Generation Models for a Low-Resource Language
+# BLOOMZ and mT5 Fine-Tuning: Optimizing Large Language Models for a Low-Resource Language
 
 This repository contains my work on fine-tuning two powerful language models (BloomZ and mT5-small) for text generation in Haitian Creole, a low-resource language. The models are specifically adapted to understand prompts and generate contextually appropriate responses in Haitian Creole. Both models were trained using an Alpaca-style instruction dataset to enhance their generation abilities. Both models were trained using an Alpaca-style instruction dataset to enhance their ability to understand and generate Haitian Creole text.
 
