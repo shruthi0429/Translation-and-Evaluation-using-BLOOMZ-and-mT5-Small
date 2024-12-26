@@ -1,127 +1,83 @@
-# Translation-and-Evaluation-using-BLOOMZ-and-mT5-Small
+# Fine-Tuned Text Generation Models for a Low-Resource Language
 
----
+This repository contains my work on fine-tuning two powerful language models (BloomZ and mT5-small) for text generation in Haitian Creole, a low-resource language. The models are specifically adapted to understand prompts and generate contextually appropriate responses in Haitian Creole. Both models were trained using an Alpaca-style instruction dataset to enhance their generation abilities. Both models were trained using an Alpaca-style instruction dataset to enhance their ability to understand and generate Haitian Creole text.
 
-## Overview
+## Models Overview
 
-This project implements and evaluates two powerful multilingual transformer models—**BLOOMZ** and **mT5-Small**—to handle translation tasks. It involves training, testing, and comparing these models' performances on multilingual datasets. The repository includes two Jupyter notebooks:
+### 1. Fine-Tuned BloomZ Model
+**Model Repository:** [`sprab4/bloomz_fine_tuned_model`](https://huggingface.co/sprab4/bloomz_fine_tuned_model)
 
-1. **`NLP_FinalProject.ipynb`** - The main notebook for loading data, fine-tuning the models, and performing translation tasks.
-2. **`NLP_FinalProject_Evaluation.ipynb`** - Dedicated to evaluating the models using various metrics and visualization techniques.
+The BloomZ model, originally designed for multilingual tasks, has been fine-tuned to generate fluent and contextually accurate text specifically in Haitian Creole. The base model's multilingual capabilities make it particularly suitable for this task.
 
----
+### 2. Fine-Tuned mT5-Small Model
+**Model Repository:** [`sprab4/mt5_fine_tuned_model`](https://huggingface.co/sprab4/mt5_fine_tuned_model)
 
-## Key Features
+The mT5-Small model, which supports over 100 languages including Haitian Creole, has been fine-tuned for text generation tasks. Its architecture is particularly well-suited for text-to-text generation tasks in Haitian Creole.
 
-- **Pre-trained Models**:
-  - **BLOOMZ**: A multilingual open fine-tuned language model.
-  - **mT5-Small**: A lightweight multilingual variant of the T5 (Text-to-Text Transfer Transformer) model.
+## Training Details
 
-- **Translation Tasks**:
-  - Focused on multilingual data (e.g., English and Haitian Creole).
-  - Fine-tuned for specific translation tasks to improve performance.
+Both models were trained using similar approaches but with different hyperparameters optimized for their respective architectures.
 
-- **Evaluation**:
-  - Comparative performance analysis using metrics like BLEU and ROUGE.
-  - Detailed visualization of results.
+### BloomZ Training Configuration
+- **Base Model:** `bigscience/bloomz`
+- **Training Process:**
+  - 2 epochs using Hugging Face Trainer
+  - Validation-based performance monitoring
+  - Alpaca-style instruction-response format
+- **Hyperparameters:**
+  - Learning rate: 5e-5
+  - Per device train batch size: 2
+  - Gradient accumulation steps: 8
+  - FP16: False
+  - Weight decay: 0.1
+  - Warmup steps: 500
 
----
+### mT5-Small Training Configuration
+- **Base Model:** `google/mt5-small`
+- **Training Process:**
+  - 2 epochs using Hugging Face Trainer
+  - Validation-based performance monitoring
+  - Alpaca-style instruction-response format
+- **Hyperparameters:**
+  - Learning rate: 1e-4
+  - Per device train batch size: 4
+  - Gradient accumulation steps: 4
+  - FP16: False
+  - Weight decay: 0.05
+  - Warmup steps: 100
 
-## Notebooks Overview
+## Performance Evaluation
 
-### 1. `NLP_FinalProject.ipynb`
+Both models were evaluated using BERTScore on various prompts. Here's a comparison using a sample prompt:
 
-#### Features:
-- **Data Preparation**:
-  - Loads and preprocesses multilingual datasets.
-  - Handles tokenization and preparation for BLOOMZ and mT5-Small.
-- **Fine-tuning**:
-  - Customizes both models for the translation task.
-  - Optimizes using hyperparameters specific to each model.
-- **Translation**:
-  - Performs translation using both BLOOMZ and mT5-Small.
-  - Logs intermediate and final translations for comparison.
+**Sample Prompt:**
+```
+Solèy la ap kouche ak yon bèl solèy kouche vizib nan orizon an, dekri li nan de fraz
+```
+(English: The sun is setting and a beautiful sunset is visible on the horizon, describe it in two sentences)
 
----
+### BloomZ Performance
+- BERTScore Precision: 0.7526
+- BERTScore Recall: 0.7445
+- BERTScore F1: 0.7485
 
-### 2. `NLP_FinalProject_Evaluation.ipynb`
+### mT5-Small Performance
+- BERTScore Precision: 0.6636
+- BERTScore Recall: 0.6542
+- BERTScore F1: 0.6589
 
-#### Features:
-- **Metric Calculation**:
-  - Computes BLEU, ROUGE, and other standard metrics to evaluate translation quality.
-  - Analyzes performance on the test set.
-- **Visualization**:
-  - Displays metric trends and comparisons in graphs.
-- **Comparative Analysis**:
-  - Summarizes the strengths and weaknesses of BLOOMZ and mT5-Small.
+## Example Outputs
 
----
+### BloomZ Output
+**Prediction:** Solèy la ap kouche ak yon bèl solèy kouche vizib nan orizon an, dekri li nan de fraz Kouchè la se koupyè nan ouviyon an. Li se fè kouyèl nan fòmèl an a. Lè se vèk la a, ak li se pèmèt pou fòm la. Kouche la te kòt pou kòm la, li te pòmè pou vòk li. La te fèt li, ki te lès pou lè li anpè.
 
-## Requirements
+### mT5-Small Output
+**Prediction:** ak yon lòd efè yo fè
 
-### Software
-- Python 3.9+
-- Jupyter Notebook
-- PyTorch
-- Transformers (Hugging Face)
-- Datasets (Hugging Face)
-- BLEU and ROUGE metric libraries
-
-### Hardware
-- **GPU Recommended** for training and fine-tuning the transformer models.
-
----
-
-## Hyperparameters
-
-- Learning Rate: 1e-4
-- Batch Size: 16
-- Epochs: 3
-- Maximum Sequence Length: 128
-
----
-
-## Results
-
-- **BLOOMZ**:
-  - High-quality translations with a focus on low-resource languages.
-  - Demonstrated robust generalization.
-
-- **mT5-Small**:
-  - Lightweight model with faster inference times.
-  - Performs well but slightly less accurate than BLOOMZ for complex translations.
-
-Key Metrics:
-- BLEU and ROUGE scores for both models.
-- Visual comparison of performance.
-
----
-
-## Usage
-
-1. **Clone Repository**:
-   ```bash
-   git clone https://github.com/username/NLP-Final-Project.git
-   cd NLP-Final-Project
-   ```
-2. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run Training**:
-   - Open `NLP_FinalProject.ipynb` in Jupyter Notebook.
-   - Execute cells to fine-tune the models.
-4. **Evaluate Models**:
-   - Open `NLP_FinalProject_Evaluation.ipynb`.
-   - Run the evaluation pipeline for performance metrics.
-
----
-
-## Future Work
-
-- Incorporate more languages to test scalability.
-- Experiment with larger variants of BLOOMZ and mT5.
-- Add domain-specific fine-tuning for specialized translation tasks.
-
----
+## Repository Structure
+- `training.ipynb`: Jupyter notebook containing the training code and process
+- `evaluation.ipynb`: Jupyter notebook containing evaluation metrics and testing
+- Model files are hosted on Hugging Face:
+  - BloomZ: [sprab4/bloomz_fine_tuned_model](https://huggingface.co/sprab4/bloomz_fine_tuned_model)
+  - mT5: [sprab4/mt5_fine_tuned_model](https://huggingface.co/sprab4/mt5_fine_tuned_model)
 
