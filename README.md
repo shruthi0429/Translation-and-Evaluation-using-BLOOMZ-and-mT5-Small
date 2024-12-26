@@ -75,8 +75,8 @@ Solèy la ap kouche ak yon bèl solèy kouche vizib nan orizon an, dekri li nan 
 **Prediction:** ak yon lòd efè yo fè
 
 ## Repository Structure
-- `training.ipynb`: Jupyter notebook containing the training code and process
-- `evaluation.ipynb`: Jupyter notebook containing evaluation metrics and testing
+- `Training.ipynb`: Jupyter notebook containing the training code and process
+- `Evaluation.ipynb`: Jupyter notebook containing evaluation metrics and testing
 - Model files are hosted on Hugging Face:
   - BloomZ: [sprab4/bloomz_fine_tuned_model](https://huggingface.co/sprab4/bloomz_fine_tuned_model)
   - mT5: [sprab4/mt5_fine_tuned_model](https://huggingface.co/sprab4/mt5_fine_tuned_model)
